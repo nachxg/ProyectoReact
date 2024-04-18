@@ -1,12 +1,12 @@
 import React from 'react'
-import { Filtros } from './Filtros/Filtros'
+import { BestSellers } from './BestSellers/BestSellers'
 import { Recientes } from './Recientes/Recientes'
 
 export const Productos = () => {
   return (
-    <div className='w-full h-96 flex flex-row mb-6 p-3 gap-4'>
-        <Filtros msj = "Acá se filtrarán los productos por género, artista, etc."/>
-        <Recientes msj = "Acá se mostrarán los últimos productos añadidos." />
+    <div className='pt-6 w-full h-[500px] flex flex-row flex-wrap md:flex-nowrap md:flex-row mb-6 md:p-3 gap-3 md:gap-4'>
+        <BestSellers msj = "Acá se mostrarán los vinilos más vendidos."/>
+        <Recientes msj = "Acá se mostrarán los últimos productos añadidos."/>
     </div>
   )
 }

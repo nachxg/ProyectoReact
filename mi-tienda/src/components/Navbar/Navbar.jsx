@@ -1,43 +1,35 @@
-import React, { useState } from 'react'
-import { BsSearch } from "react-icons/bs";
-import { BsCart3 } from "react-icons/bs";
-import { FaRecordVinyl } from "react-icons/fa6";
+import React from 'react'
 import { Modo } from './Modo/Modo';
+import { Carrito } from './Carrito/Carrito';
+import { Busqueda } from './Busqueda/Busqueda';
+import { Opciones } from './Opciones/Opciones';
 
 export const Navbar = () => {
 
-    const [mouseOver, setMouseOver] = useState("");
-
-    const handleMouseOver = () => {
-        setMouseOver(<span className='opacity-100 absolute'>inyl</span>);
-        document.getElementById("spanStore").classList.add("translate-x-16","ml-[6px]");
-    }
-
-    const handleMouseOut = () => {
-        setMouseOver(<span className='opacity-0 absolute'>inyl</span>);
-        document.getElementById("spanStore").classList.remove("translate-x-16","ml-[6px]");
-    }
-
     return (
-            <nav className='bg-neutral-50 shadow-neutral-300 shadow-md bg-opacity-80 dark:bg-stone-950 dark:shadow-black dark:shadow-xl dark:bg-opacity-80 w-full flex justify-between items-center px-5 py-2 sticky top-0'>
-                <a onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className="ml-2 mr-2 w-1/3 text-6xl font-thin cursor-pointer">
-                    v{mouseOver}
-                    <span id="spanStore" className='font-[400] absolute'>
-                        st<FaRecordVinyl className='h-8 w-8 p-0 m-0 inline'/>re
-                    </span>
-                </a>
+            <nav className='z-20 bg-neutral-100 w-full flex justify-start items-center py-1 px-3 md:px-5 md:py-2 shadow-md shadow-neutral-400 dark:bg-neutral-950 dark:shadow-black'>
+                <div className='w-auto text-5xl md:text-6xl font-thin cursor-pointer relative md:pb-1 md:pr-5'>
+                    <a className= 'p-0 m-0 bg-gradient-to-r from-[#d37912] to-[#A83279] bg-clip-text text-transparent'>
+                        v
+                        <span id="spanStore" className='font-[400]'>
+                            st<i className='circ fa-solid fa-record-vinyl text-[1.6rem] md:text-[32px] md:pt-0 pt-px align-middle'></i>re
+                        </span>
+                    </a>
+                    <div className='hidden md:block absolute w-px rounded-2xl h-12 inset-y-2 inset-x-full bg-black dark:bg-white '></div>
+                </div>
 
-                <div className='font-extralight flex flex-row justify-center gap-3 text-xl dark:font-thin w-1/3'>
-                    <a className='hover:font-normal dark:hover:font-light cursor-pointer'>inicio</a>
-                    <a className='hover:font-normal dark:hover:font-light cursor-pointer'>productos</a>
-                    <a className='hover:font-normal dark:hover:font-light cursor-pointer'>contacto</a>
-                    <a className='hover:font-normal dark:hover:font-light cursor-pointer'>nosotros</a>
+                <div className='sub-animado font-light hidden md:flex flex-row justify-center gap-4 px-5 text-xl'>
+                    <a className='cursor-pointer relative'>inicio</a>
+                    <a className='cursor-pointer relative'>productos</a>
+                    <a className='cursor-pointer relative'>contacto</a>
+                    <a className='cursor-pointer relative'>nosotros</a>
                 </div>
                 
-                <div className='mr-2 gap-5 flex justify-end items-center w-1/3'>
-                        <BsSearch className='h-6 w-6 mt-1 p-[1px] hover:scale-[120%] cursor-pointer'/>
-                        <BsCart3 className='h-7 w-7 p-[1px] hover:scale-[120%] cursor-pointer'/>
+                <div className='md:mr-2 ml-auto gap-2 md:gap-5 flex justify-center pt-1 items-center'>
+                        <Busqueda />
+                        <Carrito />
                         <Modo />
+                        <Opciones />
                 </div>
             </nav>
     )

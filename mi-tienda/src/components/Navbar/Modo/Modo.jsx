@@ -1,34 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 import { PiMoon, PiSun } from "react-icons/pi";
-import { useState, useEffect } from 'react';
 
-export const Modo = () => {
+export const Modo = ({showInOptions}) => {
+  
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme ? JSON.parse(savedTheme) : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
 
-    const [theme, setTheme] = useState("light")
+  const buttonRef = useRef(null)
 
-    const handleThemeChange = () => {
-        setTheme(prevTheme => prevTheme == "light" ? "dark" : "light")
+  const handleThemeChange = () => {
+    setTheme(!theme);
+  };
 
-        if (theme == "dark") {
-            document.querySelector("body").classList.add("dark")
-        } else {
-            document.querySelector("body").classList.remove("dark")
-        }
+  const bodyRef = useRef(document.body);
 
+  useEffect(() => {
+
+    if (theme) {
+      bodyRef.current.classList.add("dark");
+    } else {
+      bodyRef.current.classList.remove("dark");
     }
 
-    useEffect(() => {
+    showInOptions ? buttonRef.current.classList.remove('hidden') : buttonRef.current.classList.add('hidden');
+    localStorage.setItem('theme', JSON.stringify(theme));
 
-      if(theme == "dark"){
-        document.querySelector("body").classList.add("dark");
-      } else {
-        document.querySelector("body").classList.remove("dark");
-      }
+  }, [theme,showInOptions]);
 
-    }, [theme])
+  const sunIcon = <PiSun className='h-8 w-8 md:h-7 md:w-7 p-px mt-1 hover:scale-[120%] cursor-pointer transition-transform hover:rotate-90'/>
+  const moonIcon = <PiMoon className='h-8 w-8 md:h-7 md:w-7 p-px mt-1 hover:scale-[120%] cursor-pointer transition-transform hover:-rotate-90'/>
     
-
   return (
-    <PiMoon onClick={handleThemeChange} className='h-7 w-7 p-[1px] mt-1 hover:scale-[120%] cursor-pointer'/>
-  )
-}
+    <>
+        <button ref={buttonRef} onClick={handleThemeChange} className='hidden md:block'>
+            {theme ? sunIcon : moonIcon}
+        </button>
+    </>
+  );
+};
