@@ -1,18 +1,24 @@
 import { Navbar } from './components/Navbar/Navbar';
-import { Footer } from './components/Footer/Footer';
-import { Novedades } from './components/Novedades/Novedades';
-import { Productos } from './components/Productos/Productos';
+import { Home } from './components/Home/Home';
+import { ContenedorProductos } from './components/Productos/ContenedorProductos/ContenedorProductos';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {ContenedorDetalle} from './components/Productos/ContenedorDetalle/ContenedorDetalle';
 
 function App() {
 
   return (
-      <div className='text-black max-w-screen h-fit bg-fixed bg-neutral-200 flex justify-start flex-col items-center dark:text-white dark:bg-neutral-900 dark:bg-blend-multiply'>
+      <Router>
 
         <Navbar />
-        <Novedades msj="Acá se mostraran las novedades de la página." />
-        <Productos />
 
-      </div>
+        <Routes>
+          <Route path='/' element={<Home/>} />
+          <Route path='/productos' element={<ContenedorProductos />} />
+          <Route path='/productos/:categoryId/:filterId' element={<ContenedorProductos />}></Route>
+          <Route path='/productos/:prodId' element={<ContenedorDetalle />}></Route>
+        </Routes>
+
+      </Router>
   )
 }
 

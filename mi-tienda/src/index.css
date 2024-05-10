@@ -9,8 +9,6 @@
     padding: 0;
 }
 
-
-
 body * {
   transition: color, transform, scale;
   transition-duration: 0.07s, 0.1s, 0.1s;
@@ -33,7 +31,7 @@ body * {
 
 ::-webkit-scrollbar {
   width: 4px;
-  background-color: white;
+  background-color: #a3a3a3;
 }
  
 ::-webkit-scrollbar-corner {
@@ -41,10 +39,20 @@ body * {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(to bottom, #d37912, #A83279);
+  border-radius: 10px;
+  background-color: #737373;
 }
 
 .dark::-webkit-scrollbar {
-  width: 5px;
+  width: 3px;
   background-color: black;
+}
+
+.hover-detalle {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.container-vinilo:hover .hover-detalle {
+  opacity: 80%;
 }

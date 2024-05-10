@@ -24,10 +24,14 @@ export const Modo = ({showInOptions}) => {
       bodyRef.current.classList.remove("dark");
     }
 
-    showInOptions ? buttonRef.current.classList.remove('hidden') : buttonRef.current.classList.add('hidden');
     localStorage.setItem('theme', JSON.stringify(theme));
 
-  }, [theme,showInOptions]);
+  }, [theme]);
+
+  useEffect(() => {
+      showInOptions ? buttonRef.current.classList.remove('hidden') : buttonRef.current.classList.add('hidden');
+  }, [showInOptions])
+  
 
   const sunIcon = <PiSun className='h-8 w-8 md:h-7 md:w-7 p-px mt-1 hover:scale-[120%] cursor-pointer transition-transform hover:rotate-90'/>
   const moonIcon = <PiMoon className='h-8 w-8 md:h-7 md:w-7 p-px mt-1 hover:scale-[120%] cursor-pointer transition-transform hover:-rotate-90'/>
