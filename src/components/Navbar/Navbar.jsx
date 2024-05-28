@@ -1,9 +1,8 @@
-import React from 'react'
 import { Modo } from './Modo/Modo';
 import { Carrito } from './Carrito/Carrito';
 import { Busqueda } from './Busqueda/Busqueda';
 import { Opciones } from './Opciones/Opciones';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
 

@@ -56,3 +56,7 @@ body * {
 .container-vinilo:hover .hover-detalle {
   opacity: 80%;
 }
+
+.btn-trans{
+  transition: height 0.1s ease;
+}

@@ -2,7 +2,7 @@ import { Navbar } from './components/Navbar/Navbar';
 import { Home } from './components/Home/Home';
 import { ContenedorProductos } from './components/Productos/ContenedorProductos/ContenedorProductos';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import {ContenedorDetalle} from './components/Productos/ContenedorDetalle/ContenedorDetalle';
+import { ContenedorDetalle } from './components/Productos/ContenedorDetalle/ContenedorDetalle';
 
 function App() {
 
