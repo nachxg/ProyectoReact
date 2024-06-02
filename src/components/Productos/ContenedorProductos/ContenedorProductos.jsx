@@ -46,7 +46,7 @@ export const ContenedorProductos = () => {
   }, [])
   
   return (
-    <div className='md:px-6 pt-6 w-full flex justify-center items-end flex-col h-auto'>
+    <div className='md:px-6 pt-6 w-full flex justify-center items-end flex-col h-auto min-h-[27rem]'>
       { loading ? <PiVinylRecordLight className='absolute inset-y-[50%] inset-x-[46%] animate-spin size-20' /> : <>
         <div className='flex flex-row items-center w-full'>
         <div className='flex flex-row 

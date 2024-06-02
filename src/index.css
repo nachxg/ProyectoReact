@@ -60,3 +60,13 @@ body * {
 .btn-trans{
   transition: height 0.1s ease;
 }
+
+.carrito{
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.2s ease;
+}
+
+.carrito>div{
+  right: -30rem;
+  transition: right 0.2s ease;
+}

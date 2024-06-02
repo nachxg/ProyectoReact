@@ -1,13 +1,70 @@
 import React from 'react'
-import { BsCart3 } from "react-icons/bs";
+import { useEffect, useRef } from 'react'
+import { IoMdClose } from "react-icons/io";
+import { FaRegTrashCan } from "react-icons/fa6";
+import { CarritoProducto } from './CarritoProducto';
+import { useCarritoContext } from '../../../context/CarritoContext';
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 
-export const Carrito = () => {
-  return (
-    <button className='relative active:scale-[120%] md:hover:scale-[120%]'>
-        <BsCart3 className='h-6 w-6 md:h-7 md:w-7 md:p-[1px]'/>
-        <div className='absolute bg-gradient-to-r from-[#d37912] to-[#A83279] flex items-center justify-center size-[17px] rounded-full -top-[5px] -right-[6px] text-white text-sm'>
-          3
+
+export const Carrito = ({ show, cerrar }) => {
+
+    const bodyRef = useRef(document.body)
+    const bgRef = useRef(null)
+    const carritoRef = useRef(null)
+    const { carrito, borrarItem, vaciarCarrito, precioTotal } = useCarritoContext();
+
+    useEffect(() => {
+
+        if (show) {
+            bgRef.current.classList.remove('hidden')
+            bgRef.current.classList.add('block')
+            bodyRef.current.classList.add('overflow-hidden')
+            setTimeout(() => {
+                bgRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+                carritoRef.current.style.right = '0'
+            }, 10);
+        } else {
+            bgRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0)'
+            carritoRef.current.style.right = '-30rem'
+            setTimeout(() => {
+                bgRef.current.classList.add('hidden')
+                bgRef.current.classList.remove('block')
+                bodyRef.current.classList.remove('overflow-hidden')
+            }, 300);
+        }
+
+    }, [show])
+
+    return (
+        <div ref={bgRef} className='font-light carrito z-40 hidden absolute top-0 left-0 h-screen w-screen'>            
+            <div ref={carritoRef} className='fixed top-0 h-full w-[30rem] bg-neutral-200 dark:bg-neutral-900 flex flex-col py-2 px-5'>
+                <div className='flex flex-row items-center w-full px-5 pb-2'>
+                    <h1 className='text-2xl flex-1 text-center '>carrito de compras</h1>
+                    <button onClick={cerrar}><IoMdClose className='size-5 mt-1'/></button>
+                </div>
+                {carrito.length != 0 
+                    ? <> 
+                        <div className='my-2 flex-1 flex flex-col items-stretch justify-start overflow-x-hidden overflow-y-auto *:my-1 *:mr-2 *:rounded-md *:bg-neutral-100 *:shadow-md *:shadow-neutral-300 *:dark:bg-neutral-950 *:dark:shadow-black'>
+                            {carrito?.map(item => <CarritoProducto key={item.id} {...item} borrarItem={borrarItem}/>)}
+                        </div>
+                        <div className='h-20 w-full  flex flex-row items-center justify-between'>
+                            <h1 className='text-lg'>total: <b className='font-semibold'>${precioTotal.toFixed(2)}</b></h1>
+                            <div className='flex flex-row-reverse gap-2'>
+                                <button className='text-lg font-normal px-5 py-2 text-white bg-gradient-to-tr from-[#d37912] to-[#A83279] rounded-md hover:scale-105 transition-transform'>Pagar</button>
+                                <button onClick={vaciarCarrito} className='text-md font-normal text-neutral-500 hover:underline flex flex-row items-center justify-center gap-1'>
+                                    <span><FaRegTrashCan/></span>
+                                    vaciar carrito
+                                </button>
+                            </div>
+                        </div> 
+                      </>
+                    : <div className='flex-1 flex flex-row items-center justify-center text-left text-neutral-500 gap-4'>
+                        <AiOutlineExclamationCircle className='size-10'/>
+                        <span>Tu carrito se encuentra vacío. Dirigite a la sección de productos para comenzar a comprar.</span>
+                      </div>
+                    }
+            </div>
         </div>
-    </button>
-  )
+    )
 }

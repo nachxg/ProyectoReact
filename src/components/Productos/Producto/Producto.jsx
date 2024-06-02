@@ -20,10 +20,7 @@ export const Producto = ({ nombre, artista, portada, precio, id }) => {
 
       <div className='text-neutral-500 text-sm max-w-40 break-words'>{artista}</div>
 
-      <button className='group rounded-full size-9 absolute bottom-2 right-2 text-black dark:text-white flex justify-center items-center'>
-        <BsCart3 className='h-6 w-6'/>
-        <FaPlus className='group-hover:bg-gradient-to-r p-px group-hover:text-white from-[#d37912] to-[#A83279] absolute bottom-[19px] right-[4px] bg-neutral-200 dark:bg-neutral-900 rounded-full size-3'></FaPlus>
-      </button>
+
 
     </Link>
   )

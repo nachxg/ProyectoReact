@@ -1,5 +1,5 @@
 import { Modo } from './Modo/Modo';
-import { Carrito } from './Carrito/Carrito';
+import { CarritoWidget } from './Carrito/CarritoWidget';
 import { Busqueda } from './Busqueda/Busqueda';
 import { Opciones } from './Opciones/Opciones';
 import { Link } from 'react-router-dom';
@@ -27,7 +27,7 @@ export const Navbar = () => {
                 
                 <div className='w-full md:pt-px lg:pt-0 lg:mr-2 gap-4 lg:gap-5 flex justify-end items-center'>
                         <Busqueda />
-                        <Carrito />
+                        <CarritoWidget />
                         <Modo />
                         <Opciones />
                 </div>

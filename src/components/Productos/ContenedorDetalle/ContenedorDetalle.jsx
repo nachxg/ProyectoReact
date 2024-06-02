@@ -22,7 +22,7 @@ export const ContenedorDetalle = () => {
     }, [prodId])
     
   return (
-    <div className='md:px-10 pt-6 h-full w-full flex justify-center items-end flex-col'>
+    <div className='md:px-10 pt-6 h-full w-full flex justify-center items-end flex-col min-h-[27rem]'>
       { loading ? <PiVinylRecordLight className='absolute inset-y-[50%] inset-x-[46%] animate-spin size-20'/> : 
       <>
       <div className='flex flex-row items-center w-full'>
