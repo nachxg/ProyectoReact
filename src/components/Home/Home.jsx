@@ -1,5 +1,7 @@
 import vinilofondo from '../../assets/vinilofondo.png'
 import { Link } from 'react-router-dom'
+import { importarProductos } from '../../mock/importarProductos'
+import { useEffect } from 'react'
 export const Home = () => {
 
   return (

@@ -21,8 +21,6 @@ export const Navbar = () => {
                 <div className='sub-animado  md:pt-1 lg:pt-0 font-light hidden md:text-lg md:flex flex-row justify-center md:gap-3 gap-4 md:pr-1 px-5 lg:text-xl'>
                     <Link to='/' className='cursor-pointer relative'>inicio</Link>
                     <Link to='/productos' className='cursor-pointer relative'>productos</Link>
-                    <Link to='/' className='cursor-pointer relative'>contacto</Link>
-                    <Link to='/' className='cursor-pointer relative'>nosotros</Link>
                 </div>
                 
                 <div className='w-full md:pt-px lg:pt-0 lg:mr-2 gap-4 lg:gap-5 flex justify-end items-center'>

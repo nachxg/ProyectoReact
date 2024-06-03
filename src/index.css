@@ -70,3 +70,13 @@ body * {
   right: -30rem;
   transition: right 0.2s ease;
 }
+
+.input-animado label{
+  transition: transform 0.1s ease, font-size 0.1s ease;
+}
+
+.input-animado input:focus+label,
+.input-animado input:not(:placeholder-shown)+label{
+  transform: translateY(-26px);
+  @apply text-sm;
+}

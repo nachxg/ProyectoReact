@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom'
-import { getProductById } from '../../../mock/MockData';
 import { Detalle } from './Detalle/Detalle';
 import { RxCaretLeft } from "react-icons/rx";
 import { PiVinylRecordLight } from 'react-icons/pi';
+import { db } from '../../../firebase/dbConnection'
+import { collection, getDoc, doc } from "firebase/firestore";
 
 export const ContenedorDetalle = () => {
 
@@ -13,12 +14,19 @@ export const ContenedorDetalle = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-      getProductById(prodId).then((response) => {
-        setLoading(false)
-        setProducto(response)
-      }).catch((err) => {
-        console.log(err)
-      });
+      setLoading(true);
+      const productosCollection = collection(db, "productos");
+      const refDoc = doc(productosCollection, prodId);
+
+      getDoc(refDoc)
+        .then((doc) => {
+          setProducto({ id: doc.id, ...doc.data() });
+          setLoading(false);
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err);
+        });
     }, [prodId])
     
   return (

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import { getProducts, getProductsByCategory, getFilterList } from '../../../mock/MockData'
 import { ListaProductos } from '../ListaProductos/ListaProductos'
-import { Filtros } from '../Filtros/Filtros'
 import { useParams, Link } from 'react-router-dom'
 import { PiVinylRecordLight } from 'react-icons/pi';
+import { db } from '../../../firebase/dbConnection'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 
 export const ContenedorProductos = () => {
+
+  const productosCollection = collection(db, "productos");
 
   const [productos, setProductos] = useState([])
   const [loading, setLoading] = useState(true)
@@ -13,38 +15,44 @@ export const ContenedorProductos = () => {
 
   useEffect(() => {
     if (categoryId && filterId) {
-      getProductsByCategory(categoryId, filterId)
-        .then(response => {
-          setProductos(response)
-          setLoading(false)
+      const cons = query(
+        productosCollection,
+        where(categoryId, "==", filterId)
+      );
+
+      getDocs(cons)
+        .then(({ docs }) => {
+          const prodFromDocs = docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+
+          setProductos(prodFromDocs);
+          setLoading(false);
         })
-        .catch(error => {
-              console.error(error)
+        .catch((error) => {
+          console.log(error);
         });
+
     } else {
-      getProducts()
-        .then(response => {
-          setProductos(response)
-          setLoading(false)
-        })
-        .catch(error => {
-          console.error(error)
-        })
+
+      getDocs(productosCollection)
+      .then(({ docs }) => {
+        const prodFromDocs = docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setProductos(prodFromDocs);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     }
   }, [categoryId, filterId])
 
-  const [listas, setListas] = useState([])
-
-  useEffect(() => {
-    getFilterList()
-      .then(response => {
-        setListas(response)
-      })
-      .catch(error => {
-        console.error(error)
-      });
-  }, [])
-  
   return (
     <div className='md:px-6 pt-6 w-full flex justify-center items-end flex-col h-auto min-h-[27rem]'>
       { loading ? <PiVinylRecordLight className='absolute inset-y-[50%] inset-x-[46%] animate-spin size-20' /> : <>
@@ -56,7 +64,7 @@ export const ContenedorProductos = () => {
           <Link to={'/productos/genero/rnb'} className='active:text-black dark:active:text-white'>r&b</Link>
           <Link to={'/productos/genero/experimental'} className='active:text-black dark:active:text-white'>experimental</Link>
           <Link to={'/productos/genero/artpop'} className='active:text-black dark:active:text-white'>art-pop</Link>
-          <Link to={'/productos/genero/alternativo'} className='active:text-black dark:active:text-white'>alternativo</Link>
+          <Link to={'/productos/genero/electronica'} className='active:text-black dark:active:text-white'>electronica</Link>
         
         </div>
         <h1 className='ml-auto px-3 md:px-0 text-right text-5xl w-fit font-normal'>productos</h1>
