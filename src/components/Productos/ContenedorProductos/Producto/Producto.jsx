@@ -1,6 +1,4 @@
 import React from 'react'
-import { BsCart3 } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 
 export const Producto = ({ nombre, artista, portada, precio, id }) => {

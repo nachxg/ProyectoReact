@@ -56,8 +56,6 @@ export const Opciones = () => {
 
                 <button className='p-4 border-b-[1px] active:bg-neutral-300 dark:active:bg-neutral-800 border-neutral-300 dark:border-neutral-800 w-full text-left'>inicio</button>
                 <button className='p-4 border-b-[1px] active:bg-neutral-300 dark:active:bg-neutral-800 border-neutral-300 dark:border-neutral-800 w-full text-left'>productos</button>
-                <button className='p-4 border-b-[1px] active:bg-neutral-300 dark:active:bg-neutral-800 border-neutral-300 dark:border-neutral-800 w-full text-left'>contacto</button>
-                <button className='p-4 border-b-[1px] active:bg-neutral-300 dark:active:bg-neutral-800 border-neutral-300 dark:border-neutral-800 w-full text-left'>nosotros</button>
             
             </div>
 

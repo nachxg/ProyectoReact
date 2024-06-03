@@ -1,14 +1,13 @@
 import React from 'react'
 import { PiCaretDown } from "react-icons/pi";
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 
 export const Filtros = ({listas}) => {
 
     const fechas = listas[0];
     const artistas = listas[1];
 
-    console.log('Fechas: ',fechas,'Artistas: ', artistas)
+    console.log('Fechas: ',Array.isArray(fechas),'Artistas: ', artistas)
 
     const desplegable = useRef(null)
     const listaGeneros = useRef(null)
@@ -39,25 +38,11 @@ export const Filtros = ({listas}) => {
         </button>
         <div ref={desplegable} className='z-10 w-full absolute bg-neutral-100 h-0 inset-0 rounded-xl top-3 transition-opacity duration-100 shadow-md'>
             <div ref={listaGeneros} className='mt-7 mx-5 opacity-0 flex flex-row flex-wrap *:w-24 gap-x-3 gap-y-2 *:h-fit *:break-words'>
-              artistas
-              {fechas.map(fecha => <Link>{fecha}</Link>)}
+              <div className='*:text-neutral-500 *:text-sm *:cursor-pointer flex flex-col'>
+                
+              </div>
             </div>
         </div>
     </div>
   )
 }
-
-
-
-
-
-
-<div ref={listaGeneros} className='mt-7 mx-5 opacity-0 flex flex-row flex-wrap *:w-24 gap-x-3 gap-y-2 *:h-fit *:break-words'>
-              <div className='*:text-neutral-500 *:text-sm *:cursor-pointer flex flex-col'>
-                año
-                {productos.map(producto => <Link to={`/productos/fecha/${producto.fecha}`} key={producto.id}>{producto.fecha}</Link>)}
-              </div>
-              <div className='*:text-neutral-500 *:text-sm *:cursor-pointer flex flex-col'>
-                artista
-                {productos.map(producto => <Link to={`/productos/artista/${producto.artista}`} key={producto.id}>{producto.artista}</Link>)}
-              </div>

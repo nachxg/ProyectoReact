@@ -3,6 +3,7 @@ import { BsCart3 } from "react-icons/bs";
 import { FaPlus, FaCheck } from 'react-icons/fa6';
 import { ItemCount } from '../../ItemCount/ItemCount';
 import { useCarritoContext } from '../../../../context/CarritoContext';
+import { RiErrorWarningLine } from "react-icons/ri";
 
 export const Detalle = ({ producto }) => {
 
@@ -59,28 +60,30 @@ export const Detalle = ({ producto }) => {
 
           <div className='flex items-end justify-end flex-row gap-3 mt-auto'>
 
-          { enCarrito 
-              ? <button onClick={alternarVisible} className='btn-trans gap-1 h-10 bg-[#d37912] rounded-tl-xl rounded-tr-xl group hover:h-12 w-fit relative px-5 pb-1 text-black flex justify-center items-center'>
-                  producto agregado al carrito
-                  <FaCheck></FaCheck>
-                </button>
-              : <>
-                  <div className='pb-2'>
-                    <ItemCount stock={producto.stock} agregar={modificarCantidad}/>
-                  </div>
-                  <button onClick={() => {
-                    agregarAlCarrito(producto, cantidadFinal)
-                    setEnCarrito(true)
-                  }} className='btn-trans bg-[#d37912] hover:h-12 rounded-tl-xl rounded-tr-xl group cursor-pointer h-10 w-48 relative pl-2 pb-1 text-black flex justify-center items-center'>
-                    agregar al carrito
-                      <span className='relative rounded-full p-2 flex items-center justify-center'>
-                        <BsCart3 className='h-5 w-5'/>
-                        <FaPlus className='group-hover: bg-[#d37912] size-3 p-px absolute bottom-[18px] right-[5px] rounded-full'/>
-                      </span>
-                  </button>
-                </>
-           }
-
+            {producto.stock > 0 
+              ? ( enCarrito
+                  ? <button onClick={alternarVisible} className='btn-trans gap-1 h-10 bg-[#d37912] rounded-tl-xl rounded-tr-xl group hover:h-12 w-fit relative px-5 pb-1 text-black flex justify-center items-center'>
+                      producto agregado al carrito
+                      <FaCheck></FaCheck>
+                    </button>
+                  : <>
+                      <div className='pb-2'>
+                        <ItemCount stock={producto.stock} agregar={modificarCantidad}/>
+                      </div>
+                      <button onClick={() => {
+                        agregarAlCarrito(producto, cantidadFinal)
+                        setEnCarrito(true)
+                      }} className='btn-trans bg-[#d37912] hover:h-12 rounded-tl-xl rounded-tr-xl group cursor-pointer h-10 w-48 relative pl-2 pb-1 text-black flex justify-center items-center'>
+                        agregar al carrito
+                          <span className='relative rounded-full p-2 flex items-center justify-center'>
+                            <BsCart3 className='h-5 w-5'/>
+                            <FaPlus className='group-hover: bg-[#d37912] size-3 p-px absolute bottom-[18px] right-[5px] rounded-full'/>
+                          </span>
+                      </button>
+                    </>
+              )
+              : <div className='pb-5 text-red-600 flex flex-row gap-1'><RiErrorWarningLine className='size-5 mt-px' />Producto sin stock</div>
+            }
           </div>
           
         </div>

@@ -1,5 +1,4 @@
 import React from 'react'
-import { ItemCount } from '../../Productos/ItemCount/ItemCount'
 import { FaRegTrashCan } from "react-icons/fa6";
 
 export const CarritoProducto = ({ id, nombre, artista, portada, precio, cantidad, stock, borrarItem }) => {
