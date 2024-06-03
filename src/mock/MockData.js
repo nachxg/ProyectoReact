@@ -27,23 +27,3 @@ export const products = [
 
 ];
 
-export const getFilterList = () => {
-    return new Promise((resolve, reject) => {
-        
-        setTimeout(() => {
-
-            let aux1 = new Set();
-            let aux2 = new Set();
-            products.forEach((producto) => {
-                aux1.add(producto.fecha)
-                aux2.add(producto.artista)
-            })
-
-            const years = [...aux1]
-            const artists = [...aux2]
-
-            resolve([[years],[artists]])
-            reject('No se pudo filtrar')
-        }, 500);
-    })
-};
